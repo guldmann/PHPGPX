@@ -7,6 +7,10 @@
  * Time: 09:47
  */
 
+/**
+ * Class CLaps
+ * Lap data from GPX file
+ */
 class CLaps
 {
     private $startTime;
@@ -18,8 +22,9 @@ class CLaps
 
     public function setLap($startTime,$elapsedTime,$distance )
     {
-
-
+        self::setStartTime($startTime);
+        self::setElapsedTime($elapsedTime);
+        self::setDistance($distance);
     }
 
     /**
@@ -31,11 +36,17 @@ class CLaps
     }
 
     /**
-     * @param mixed $startTime
+     * Set startTime
+     * Call function ConvertDateTime to retrieve date and time from string
+     * Set date and time
+     * @param $startTime
      */
     public function setStartTime($startTime)
     {
         $this->startTime = $startTime;
+        $datetimearray = ConvertDateTime($startTime);
+        $this->time = isset($datetimearray['time']) ? $datetimearray['time'] : null;
+        $this->date = isset($datetimearray['date']) ? $datetimearray['date'] : null;
     }
 
     /**
@@ -76,13 +87,6 @@ class CLaps
 
 
 
-
-
-
-<index>23</index>
-<startTime>2015-06-25T20:51:23.837Z</startTime>
-<elapsedTime>2</elapsedTime>
-<distance>0</distance>
 
 
 
