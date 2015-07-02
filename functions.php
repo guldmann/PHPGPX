@@ -9,8 +9,13 @@
 
 
 
-function ConvertDateTime($datatime);
+function ConvertDateTime($datatime)
 {
+    $realDateTime = new DateTime($datatime);
 
+    $date = $realDateTime->format('Y-m-d');
+    $time = $realDateTime->format('H:i:s');
+
+    return array("data" => $date, "time" => $time);
 
 }

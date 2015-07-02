@@ -18,13 +18,51 @@ class CLaps
     private $distance;
     private $date;
     private $time;
+    private $lapIndex;
+    private $lapNumber;
 
-
-    public function setLap($startTime,$elapsedTime,$distance )
+    /**
+     * @return mixed
+     */
+    public function getLapNumber()
     {
-        self::setStartTime($startTime);
-        self::setElapsedTime($elapsedTime);
-        self::setDistance($distance);
+        return $this->lapNumber;
+    }
+
+    /**
+     * @param mixed $lapNumber
+     */
+    public function setLapNumber($lapNumber)
+    {
+        $this->lapNumber = $lapNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLapIndex()
+    {
+        return $this->lapIndex;
+    }
+
+    /**
+     * @param mixed $lapIndex
+     */
+    public function setLapIndex($lapIndex)
+    {
+        $this->lapIndex = $lapIndex;
+    }
+
+    /**
+     * array of data
+     * @param Array $data{startTime,elapsedTime,distance)
+     *
+     */
+    public function setLap($data)
+    {
+        self::setStartTime($data['startTime']);
+        self::setElapsedTime($data['elapsedTime']);
+        self::setDistance($data['distance']);
     }
 
     /**
