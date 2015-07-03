@@ -8,40 +8,82 @@
  * Time: 09:44
  */
 
+// TODO: add some error handling
 class CGPXparser
 {
     private $activity;
     private $point;
-   private $lap;
+    private $lap;
     private $gpx;
 
     /**
-     * Add gpx data in form of string or file
+     * for now only supporting gpx data as a file
      * @param $gpxData
+     *
+     * TODO: add support for data as string
      */
-    public function AddGpx($gpxData)
+    public function AddGpx($gpxDataFile)
     {
-       // if(get_resource_type($gpxData) == 'file' || get_resource_type($gpxData) == 'stream')
-       // {
-            $this->gpx = simplexml_load_file($gpxData);
-            $this->activity = new CActivity();
-            self::points();
-            self::Laps();
-        //}
-        /*
-        else if(is_string($gpxData))
-        {
-            $this->gpx = simplexml_load_string($gpxData);
+
+
+        if(file_exists ( $gpxDataFile )) {
+
+            $this->gpx = simplexml_load_file($gpxDataFile);
             $this->activity = new CActivity();
             self::points();
             self::Laps();
         }
-        else
-        {
-            // handle we have an error no file or string
-            // what to do ? output ?
-        }*/
+
+
+       //TODO: implement data as string
+        /*
+            $this->gpx = simplexml_load_string($gpxData);
+            $this->activity = new CActivity();
+            self::points();
+            self::Laps();
+        */
+
     }
+
+    /**
+     * @return CActivity object
+     */
+    public function GetActivity()
+    {
+        return $this->activity;
+    }
+
+    /**
+     * @return array CPoints object
+     */
+    public function GetPoints()
+    {
+        return $this->activity->getPoints();
+    }
+
+    /**
+     * @return array CLaps object
+     */
+    public function GetLaps()
+    {
+        return $this->activity->getLaps();
+    }
+
+    /**
+     * Set the activity type like running, biking , skiing...
+     * @param $type
+     */
+    public function SetActivityType($type)
+    {
+        if(isset($type) && $type != null && $type != "")
+        {
+            $this->activity->setType($type);
+        }
+    }
+
+    /**
+     * @param $name
+     */
     public function SetName($name)
     {
         if(isset($name) && $name != null && $name != "")
@@ -49,10 +91,16 @@ class CGPXparser
             $this->activity->setName($name);
         }
     }
+    public function GetPontByIndex($index)
+    {
+        return $this->activity->GetPontByIndex($index);
+    }
 
     public function SetNameFromFirstPoint()
     {
-        // get city street name from first lat lon point and suffix with date time
+        $point = self::GetPontByIndex(0);
+        var_dump($point);
+        Get_Address_From_Google_Maps($point->getLat(), $point->GetLon());
 
         self::SetName(null);
     }

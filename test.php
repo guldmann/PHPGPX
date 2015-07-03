@@ -16,9 +16,22 @@ include('functions.php');
 
 $parser = new CGPXparser();
 $parser->AddGpx('move.gpx');
+$parser->SetActivityType("Running");
+
+$laps = $parser->GetLaps();
+$activity = $parser->GetActivity();
+$points = $parser->GetPoints();
+$parser->SetNameFromFirstPoint();
+
 
 echo "<pre>";
-print_r($parser);
+//print_r($activity);
+echo "</pre>";
+echo "<pre>";
+//print_r($laps);
+echo "</pre>";
+echo "<pre>";
+//print_r($points);
 echo "</pre>";
 
 

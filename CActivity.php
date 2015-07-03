@@ -12,6 +12,23 @@ class CActivity
     private $laps = array();
     private $points = array();
     private $name;
+    private $type;
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * @return mixed
@@ -46,6 +63,12 @@ class CActivity
     public function getLaps()
     {
         return $this->laps;
+    }
+
+    public function GetPontByIndex($index)
+    {
+        // TODO: test if index excist
+        return $this->points[$index];
     }
 
     /**
